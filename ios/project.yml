@@ -5,7 +5,9 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    PRODUCT_BUNDLE_IDENTIFIER: com.example.ComicBrowser
+    PRODUCT_BUNDLE_IDENTIFIER: com.newdarren.comictranslator
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
     TARGETED_DEVICE_FAMILY: "1,2"
     GENERATE_INFOPLIST_FILE: YES
     INFOPLIST_KEY_CFBundleDisplayName: 华文漫画浏览器

@@ -19,5 +19,7 @@ ios/build/
 ios/*.xcodeproj/
 ios/*.xcworkspace/
 ios/DerivedData/
+ios/*.ipa
+ios/*.xcarchive/
 *.xcuserstate
 .DS_Store

@@ -1,0 +1,30 @@
+name: ComicBrowser
+options:
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    PRODUCT_BUNDLE_IDENTIFIER: com.example.ComicBrowser
+    TARGETED_DEVICE_FAMILY: "1,2"
+    GENERATE_INFOPLIST_FILE: YES
+    INFOPLIST_KEY_CFBundleDisplayName: 华文漫画浏览器
+    INFOPLIST_KEY_UILaunchScreen_Generation: YES
+targets:
+  ComicBrowser:
+    type: application
+    platform: iOS
+    sources:
+      - path: ComicBrowserApp.swift
+      - path: TranslationService.swift
+      - path: MLKitTranslationService.swift
+      - path: Overlay.js
+        buildPhase: resources
+    settings:
+      base:
+        CODE_SIGN_STYLE: Automatic
+schemes:
+  ComicBrowser:
+    build:
+      targets:
+        ComicBrowser: all

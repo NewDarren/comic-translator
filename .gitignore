@@ -1,0 +1,23 @@
+cache/
+__pycache__/
+*.py[cod]
+
+# Local comic pages and generated sample projects are not part of the source.
+samples/
+naver_page.html
+mangadex_probe.json
+
+# Local credentials and generated iOS build files.
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.mobileprovision
+ios/Pods/
+ios/build/
+ios/*.xcodeproj/
+ios/*.xcworkspace/
+ios/DerivedData/
+*.xcuserstate
+.DS_Store

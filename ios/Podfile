@@ -1,0 +1,9 @@
+platform :ios, '16.0'
+
+target 'ComicBrowser' do
+  use_frameworks!
+
+  # Latin-script OCR is bundled; English-to-Chinese translation models download on first use.
+  pod 'GoogleMLKit/TextRecognition', '8.0.0'
+  pod 'GoogleMLKit/Translate', '8.0.0'
+end

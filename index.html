@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>框译 · 漫画中文翻译</title>
+  <style>
+    :root{--ink:#233b38;--muted:#6b7a74;--accent:#167464;--line:#dce2d9;--paper:#fafaf5;--warm:#eff1e9}
+    *{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:14px}
+    button,input,select,textarea{font:inherit}button{cursor:pointer;background:white;border:1px solid var(--line);border-radius:8px;padding:9px 12px;color:var(--ink)}button:hover{border-color:var(--accent)}button:disabled{opacity:.45;cursor:default}
+    .primary{background:var(--accent);color:white;border-color:var(--accent)}input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);background:#fff;border-radius:7px;color:var(--ink)}textarea{resize:vertical;line-height:1.6}input:focus,textarea:focus,select:focus{outline:2px solid #90baaf;outline-offset:1px}
+    header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--line);background:white}.brand{display:flex;align-items:center;gap:12px}.mark{font-size:20px;color:white;background:var(--accent);padding:8px;border-radius:10px}.brand strong{font-size:22px}.brand small{display:block;color:var(--muted);margin-top:3px}.badge{border:1px solid var(--line);border-radius:20px;padding:7px 12px;color:var(--muted)}
+    main{display:grid;grid-template-columns:285px minmax(340px,1fr) 300px;min-height:calc(100vh - 76px)}aside{padding:22px 20px}.settings{border-right:1px solid var(--line)}.editor{border-left:1px solid var(--line);background:white}h1{font-size:18px;margin:0 0 8px}h2{font-size:15px;margin:0 0 14px}.intro,.hint{color:var(--muted);line-height:1.7;font-size:12px}.step{display:inline-block;background:#dfebe4;color:var(--accent);border-radius:5px;font-size:11px;padding:3px 6px;margin-right:6px}
+    .section{margin-bottom:24px}label{display:block;font-size:12px;font-weight:600;margin:14px 0 7px}.upload{border:1px dashed #9cb6ab;background:#f2f6ef;padding:24px 12px;text-align:center;border-radius:10px;width:100%;margin-top:14px}.upload strong{display:block;margin-bottom:6px}.upload span{font-size:12px;color:var(--muted)}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.wide{width:100%}.divider{height:1px;background:var(--line);margin:20px 0}details summary{cursor:pointer;color:var(--accent);font-size:12px;padding:10px 0}details input{margin:6px 0}.status{padding:12px;margin-top:14px;border-radius:8px;background:var(--warm);font-size:12px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}.status.error{background:#fbeee9;color:#984b35}.status.success{background:#e7f2e9;color:var(--accent)}
+    .workspace{min-width:0;padding:20px 24px;background:#f0f1e9}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}.toolbar .row{flex:none}.toolbar button.active{background:#d9e9df;border-color:#a5c7b8}.meta{font-size:12px;color:var(--muted)}.stage{position:relative;min-height:480px;max-height:calc(100vh - 205px);overflow:auto;border-radius:12px;border:1px solid var(--line);background:#e3e6dd;display:flex;flex-direction:column;align-items:center;padding:24px}.stage.dragover{outline:3px dashed var(--accent)}.canvas-wrap{position:relative;flex-shrink:0;max-width:100%;box-shadow:0 5px 24px #273b381a}canvas{display:block;width:100%;height:auto;background:white;touch-action:none}.empty{max-width:400px;margin:auto;text-align:center;padding:60px 20px}.empty .glyph{display:block;font-size:45px;margin-bottom:22px}.empty h2{font-size:22px;font-weight:500}.empty p{color:var(--muted);line-height:1.9}.empty button{margin-top:18px}.stage-footer{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.7}
+    .regions{display:flex;gap:6px;flex-wrap:wrap;max-height:130px;overflow:auto;margin:12px 0}.region-tab{padding:5px 9px;border-radius:6px}.region-tab.active{color:white;background:var(--accent)}.region-tab.warn{border-color:#cd9456}.editor-empty{color:var(--muted);line-height:1.8;padding:18px 0;font-size:13px}.editor textarea{min-height:82px}.caption{font-size:11px;color:var(--muted);line-height:1.7;margin:5px 0}.note{background:#fff6dd;color:#826537;padding:10px;border-radius:7px;font-size:12px;line-height:1.7;white-space:pre-wrap}.coords{display:grid;grid-template-columns:1fr 1fr;gap:6px}.coords label{margin-top:6px}.coords input{padding:7px}.field-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.field-row input[type=checkbox]{width:auto}.checkbox{display:flex;gap:7px;align-items:center;font-weight:400}.checkbox input{width:auto}.color input{height:36px;padding:4px}.danger{color:#aa573f}.hidden{display:none!important}@media(max-width:1150px){main{grid-template-columns:255px minmax(310px,1fr)}.editor{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}#editor-fields{max-width:700px}.stage{max-height:680px}}@media(max-width:680px){header{padding:0 16px}.badge{display:none}main{display:block}.settings{border:0}.workspace{padding:15px}.stage{padding:12px;max-height:620px}.settings .section{margin-bottom:16px}.brand small{font-size:11px}}
+  </style>
+</head>
+<body>
+<header><div class="brand"><span class="mark">译</span><div><strong>框译</strong><small>韩文漫画 → 中文对白 · 保留画面里的故事</small></div></div><span class="badge">本机运行 · 随时校对</span></header>
+<main>
+  <aside class="settings">
+    <div class="section"><h1>让中文回到对白框</h1><p class="intro">上传漫画图片，结合画面翻译，再把中文排进原来的框里。</p>
+      <button class="upload" id="upload"><strong>＋ 选择漫画图片</strong><span>PNG / JPG / WebP · 也可粘贴截图</span></button><input class="hidden" type="file" id="file" accept="image/png,image/jpeg,image/webp">
+      <p class="caption">建议清晰截图；单张 ≤ 20MB、3000 万像素。</p>
+      <button class="wide hidden" id="episode-sample">打开第一集试译样张</button>
+    </div>
+    <div class="section"><h2><span class="step">01</span>翻译设置</h2>
+      <label for="target">中文形式</label><select id="target"><option>简体中文</option><option>繁體中文</option></select>
+      <label for="reference">译名与语气参考</label><select id="reference"><option value="none">不使用参考配置</option><option value="fight-class-3">格技3班 · 现有中文版对照</option></select>
+      <p class="caption">参考配置统一译名和句式；最终意思以韩文原文为准。</p>
+      <label for="context">剧情背景 <span class="hint">可选</span></label><textarea id="context" rows="3" placeholder="例如：两人是师徒；这一段在寻找失踪的同伴。"></textarea>
+      <label for="glossary">人名与称呼 <span class="hint">可选</span></label><textarea id="glossary" rows="2" placeholder="韩文名字 = 中文名字，每行一条"></textarea>
+      <details id="api-settings"><summary>配置翻译模型</summary>
+        <label for="model">模型名称</label><input id="model" placeholder="填写支持图片和结构化输出的模型" autocomplete="off">
+        <label for="api-key">OpenAI API Key</label><input id="api-key" type="password" placeholder="仅用于当前会话" autocomplete="off">
+        <p class="caption" id="key-hint">点击翻译会把图片、背景和术语发送至 OpenAI，产生 API 费用。密钥不写入项目文件或浏览器存储。</p>
+      </details>
+      <button class="primary wide" id="translate" disabled>识别韩文并翻译</button><div id="status" class="status" role="status" aria-live="polite">先上传图片，或打开排字示例。手动排字不需要 API Key。</div>
+    </div>
+    <div class="divider"></div>
+    <h2><span class="step">03</span>保存结果</h2><button class="wide" id="export" disabled>↓ 下载中文图片</button>
+    <div class="row" style="margin-top:8px"><button id="save-project" disabled>保存项目</button><button id="open-project">打开项目</button></div><input class="hidden" id="project-file" type="file" accept="application/json,.json">
+    <p class="caption">项目包含原图、框的位置和译文，方便下次继续修改。</p>
+  </aside>
+  <section class="workspace">
+    <div class="toolbar"><div><h2 style="margin:0 0 4px">阅读预览</h2><span class="meta" id="image-meta">等待图片</span></div><div class="row"><select id="zoom" aria-label="预览缩放" style="width:105px;font-size:12px"><option value="width">适合宽度</option><option value="image">整图预览</option></select><button id="view-translated" class="active">中文</button><button id="view-original">原图</button><button id="add-region" disabled>＋ 框选</button></div></div>
+    <div class="stage" id="stage"><div class="empty" id="empty"><span class="glyph">▤</span><h2>画面不变，读懂对白</h2><p>中文直接显示在原来的对白框中。<br>可修改译文、框的位置、颜色和字号。</p><button id="demo">打开排字示例</button><p style="font-size:11px">示例使用预设译文，用于查看排字效果。</p></div><div class="canvas-wrap hidden" id="canvas-wrap"><canvas id="canvas" aria-label="漫画预览，可拖动调整对白区域"></canvas></div></div>
+    <div class="stage-footer" id="stage-help">拖入图片或按 Ctrl+V 粘贴截图。自动翻译后，请检查原文、译文和框的位置。</div>
+  </section>
+  <aside class="editor"><h2><span class="step">02</span>对白校对与排字</h2><div class="regions" id="region-tabs"></div><div class="editor-empty" id="editor-empty">点击一个对白区域即可编辑。<br>没有自动识别结果时，也可以点“框选”，拖出一个文字区域。</div>
+    <div id="editor-fields" class="hidden"><div class="field-row"><strong id="region-title"></strong><label class="checkbox"><input type="checkbox" id="enabled">应用此译文</label></div>
+      <label for="original">韩文原文</label><textarea id="original" rows="2"></textarea>
+      <label for="translation">中文译文</label><textarea id="translation" rows="3" placeholder="保留原意，不为塞进框内而删减"></textarea>
+      <p class="caption" id="fit-status"></p><div id="region-note" class="note hidden"></div>
+      <label for="edit-mode">当前调整的区域</label><select id="edit-mode"><option value="box">中文排字区（绿色）</option><option value="erase">原字擦除区（橙色）</option></select><p class="caption">在预览中拖动选框移动，拖右下角调整大小。擦字区只圈住原字，避开框线和画面。</p>
+      <div class="coords"><div><label for="rect-x">X</label><input id="rect-x" type="number" min="0"></div><div><label for="rect-y">Y</label><input id="rect-y" type="number" min="0"></div><div><label for="rect-width">宽度</label><input id="rect-width" type="number" min="1"></div><div><label for="rect-height">高度</label><input id="rect-height" type="number" min="1"></div></div>
+      <label for="font-size">字号 <span class="hint">0 = 自动适配</span></label><input id="font-size" type="number" value="0" min="0" max="200">
+      <div class="row color"><div><label for="background">擦字底色</label><input id="background" type="color" value="#ffffff"></div><div><label for="foreground">中文颜色</label><input id="foreground" type="color" value="#202020"></div></div>
+      <p class="caption">第一版采用纯色覆盖。纹理或渐变背景需要人工检查；不确定的译文会提示校对。</p>
+      <button class="danger wide" id="delete-region" style="margin-top:12px">删除这个区域</button>
+    </div>
+  </aside>
+</main>
+<script type="module" src="./app.js"></script>
+</body></html>

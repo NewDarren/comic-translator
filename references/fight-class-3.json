@@ -1,0 +1,20 @@
+{
+  "id": "fight-class-3",
+  "title": "格技3班 · 第一话参考校准",
+  "kind": "reference_profile",
+  "source": "https://m.manhuagui.com/comic/52303/753891.html#p=2",
+  "korean_source": "https://m.comic.naver.com/webtoon/detail?titleId=701535&no=1",
+  "glossary": {"주대각": "朱大觉"},
+  "examples": [
+    {"original": "주대각…", "translation": "朱大觉……"},
+    {"original": "주대각이는 어딨어?", "translation": "朱大觉在哪儿？"}
+  ],
+  "style": [
+    "沿用对照版的人名，并以用户术语表覆盖参考配置。",
+    "口语对白译成自然中文，保留疑问、停顿和人物态度。",
+    "中文对照是译名与句式参考。语义判断以韩文原文为准，不能照搬可能的漏译或误译。",
+    "没有在对照中核实的其他名字，仍需注明待确认。"
+  ],
+  "verification": "人工对照用户提供的第01话第2页，仅核实开头两句及其中的人名。参考版本并非已证实的官方中文版。",
+  "training_status": "未进行模型权重训练。此配置在推理时提供术语、风格与两个短例句。"
+}

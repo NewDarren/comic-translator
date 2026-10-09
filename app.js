@@ -4,6 +4,7 @@ const canvas = $('canvas'), ctx = canvas.getContext('2d');
 let image = null, source = '', filename = 'comic', regions = [], selected = null;
 let originalView = false, adding = false, drag = null, busy = false, hasKey = false;
 let loadGeneration = 0, apiGeneration = 0;
+const staticPages = location.hostname.endsWith('.github.io');
 
 function status(message, kind = '') { $('status').textContent = message; $('status').className = `status ${kind}`; }
 function current() { return regions.find(region => region.id === selected); }
@@ -17,10 +18,10 @@ function fitPreview() {
 }
 $('zoom').onchange = () => { fitPreview(); paint(); };
 function buttons() {
-  $('translate').disabled = !image || busy;
+  $('translate').disabled = staticPages || !image || busy;
   for (const id of ['export', 'save-project', 'add-region']) $(id).disabled = !image || busy;
   for (const id of ['upload', 'demo', 'open-project', 'episode-sample']) $(id).disabled = busy;
-  $('translate').textContent = busy ? '正在结合画面翻译…' : '识别韩文并翻译';
+  $('translate').textContent = staticPages ? '自动翻译需后端服务' : busy ? '正在结合画面翻译…' : '识别韩文并翻译';
 }
 function drawRegion(region, context = ctx) {
   if (!region.enabled || !region.translation.trim()) return { fits: true, size: 0, lines: [] };
@@ -289,7 +290,17 @@ fetch('/api/config').then(response => response.json()).then(config => {
   hasKey = config.has_key; if (config.model) $('model').value = config.model;
   if (hasKey) $('api-key').placeholder = '已配置服务器环境变量，可留空';
   $('episode-sample').classList.toggle('hidden', !config.has_sample);
-}).catch(() => { $('api-settings').open = true; status('未连接本机服务。先运行 server.py；手动排字示例仍可使用。','error'); });
+}).catch(() => {
+  if (staticPages) {
+    $('hosted-note').classList.remove('hidden');
+    $('api-settings').classList.add('hidden');
+    status('GitHub Pages 静态版已就绪：可上传图片、手动填写译文、调整对白框并导出。自动识图和翻译需要 Python 服务；请勿在此页面输入 API Key。','success');
+    buttons();
+  } else {
+    $('api-settings').open = true;
+    status('未连接本机服务。先运行 server.py；手动排字示例仍可使用。','error');
+  }
+});
 
 $('episode-sample').onclick = async () => {
   try {

@@ -23,8 +23,6 @@ open ComicBrowser.xcworkspace
 
 请打开 CocoaPods 生成的 **`.xcworkspace`**，不要只打开 `.xcodeproj`，否则 Swift 找不到 ML Kit。`Podfile` 固定使用 Google 官方文档中的 `GoogleMLKit/TextRecognition` 与 `GoogleMLKit/Translate` 8.0.0。每次改动 `project.yml` 后，先重新 `xcodegen generate`，再运行 `pod install`。在 Xcode 改成自己的 Bundle Identifier，选自己的签名 Team 和目标设备，Build / Run。
 
-没有 Mac 时，可在私人 GitHub 仓库的 **Actions → Build unsigned iOS IPA → Run workflow** 手动触发 macOS 构建（公开仓库会跳过）。成功后，从该次运行的 **Artifacts** 下载 `ComicBrowser-unsigned-ipa`；内含 `ComicBrowser-unsigned.ipa`。流程只编译 iPhone 的 arm64 App 并打包，**没有签名**，下载的 IPA 不能直接在 iPhone 打开。需用 AltStore/AltServer 等工具以自己的 Apple ID 签名并安装；这一步及真机翻译效果尚未验证。工作流程不会因推送源码自动运行，构建产物保留 3 天。
-
 若不用 XcodeGen 而手动创建 SwiftUI iOS App，需把 `ComicBrowserApp.swift`、`TranslationService.swift`、`MLKitTranslationService.swift` 加入同一 target，把 `Overlay.js` 加到 **Copy Bundle Resources**，并令 Xcode target 名为 `ComicBrowser`（或同步修改 Podfile target 名）。移除模板自带的 `@main App`；部署目标设为 iOS 16，随后在工程目录 `pod install` 并打开 `.xcworkspace`。
 
 ## 阅读行为与限制
@@ -37,7 +35,7 @@ open ComicBrowser.xcworkspace
 
 ## Google 标示与发布
 
-Google 要求使用 ML Kit 设备端翻译的应用遵守适用的 [Cloud Translation 归属标示规则](https://developers.google.com/ml-kit/language/translation/translation-terms)。发布前应检查 App 内译文附近的 Google Translate 标示、App 说明及帮助页，并复核当时有效的[具体归属要求](https://docs.cloud.google.com/translate/attribution)。不要让产品名称暗示 Google 官方关联。GitHub 仓库能分享源码，不能单靠仓库链接让 iPhone 用户直接运行；分发仍需按 Apple 的安装、测试或上架流程进行。
+Google 要求使用 ML Kit 设备端翻译的应用遵守适用的 [Cloud Translation 归属标示规则](https://developers.google.com/ml-kit/language/translation/translation-terms)。发布前应检查 App 内译文附近的 Google Translate 标示、App 说明及帮助页，并复核当时有效的[具体归属要求](https://docs.cloud.google.com/translate/attribution)。不要让产品名称暗示 Google 官方关联。GitHub Pages 手机网页是独立的静态排字演示；设备端 ML Kit 仍需编译成原生 iOS App。
 
 ## 真机验收
 

@@ -2,11 +2,11 @@
 
 本机漫画阅读器：输入 MangaDex 或 Naver 作品目录／章节链接 → 选章 → 翻页或连续滚动 → 英文或韩文翻译成华文 → 中文叠在原来的对白框内。来源语言取自章节元数据。Naver 按网站原有图片分段阅读，不需要逐页上传截图。
 
-## 上传到 GitHub
+## GitHub Pages 手机网页
 
-可以把本目录作为**源码仓库**上传。`.gitignore` 已排除本机缓存、第三方漫画样张、抓取调试文件、密钥文件及 iOS 构建产物。上传前用 `git status` 或 GitHub Desktop 的变更列表确认没有漫画原图或 API Key；如果使用 GitHub 网页手动拖拽文件，需自行跳过这些文件，因为 `.gitignore` 不会过滤网页上传。公开仓库不附带 `samples/`，因此首页的人工漫画样张入口在新克隆的副本中不可用，正常导入章节和自制排字示例仍按各自说明使用。
+公开仓库的 GitHub Pages 网页入口是 <https://newdarren.github.io/comic-translator/>。页面可在 iPhone Chrome 打开，上传漫画图、手动输入中文、调整对白框并导出图片。这个是静态演示版；GitHub Pages 不运行 Python/FastAPI，因此 MangaDex/Naver 目录读取和自动 OCR/翻译需要另行运行服务。静态网页会禁用自动翻译按钮，不要在网页里填写 API Key。
 
-GitHub 仓库链接用于分享代码，**不能直接当成 iPhone Chrome 的在线翻译网址**。GitHub Pages 不运行本项目的 Python/FastAPI 服务；网页版要供他人通过网址使用，需要另行部署服务、配置 HTTPS，并决定如何提供云端翻译凭证。`ios/` 使用设备端 ML Kit，不靠网页服务器，但要先在 Mac 上编译、签名和安装；公开给其他 iPhone 用户安装还需走 Apple 的分发流程。目前 iOS 原型尚未真机验证。
+`.gitignore` 排除本机缓存、漫画样张、抓取文件、密钥和构建产物。仓库公开后所有已提交的源码都会对公众可见；没有提交第三方漫画样图。推送网页代码到 `main` 会触发 GitHub Pages 部署。
 
 iPhone/iPad 原站浏览器源码在 `ios/`。它通过 WKWebView 直接打开原网站，保留原站目录、章节链接和网页后退，停住后自动翻译当前漫画画面；与本机网页版的 MangaDex 目录适配器不同。iOS 版现在默认使用 Google ML Kit 在设备上识别英文并译为华文，无需按页调用付费翻译 API；原有图片模型保留为可选云端模式。本机模式仅尝试处理漫画图像内、背景平整的文字，无法安全覆盖时保留英文。iOS 源码尚未在 Mac/Xcode 编译或真机验证，详情看 `ios/README.md`。
 
